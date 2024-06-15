@@ -1,8 +1,7 @@
 package org.example.servicio;
 
-import org.example.modelo.Cliente;
 import org.example.modelo.CategoriaEnum;
-
+import org.example.modelo.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +29,6 @@ public class ClienteServicio {
         listaClientes.add(nuevoCliente);
     }
 
-    // Método para editar cliente
     public void editarCliente(String runCliente, String nombreCliente, String apellidoCliente, int aniosCliente, CategoriaEnum nombreCategoria) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getRunCliente().equals(runCliente)) {

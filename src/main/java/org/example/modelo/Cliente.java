@@ -15,4 +15,13 @@ public class Cliente {
     private int aniosCliente;
     private CategoriaEnum nombreCategoria;
 
+    @Override
+    public String toString() {
+        return "Cliente" + "\n" +
+                "Rut= " + runCliente + "\n" +
+                "Nombre= " + nombreCliente + "\n" +
+                "Apellido= " + apellidoCliente + "\n" +
+                "Anio= " + aniosCliente +"\n"+
+                "Categoria= " + nombreCategoria;
+    }
 }
