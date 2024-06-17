@@ -15,18 +15,33 @@ public class Menu {
     private ExportadorTxt exportarTxt = new ExportadorTxt();
     private String fileName = "Clientes";
     private String fileName1 = "DBClientes.csv";
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     public void iniciarMenu() {
         while (true) {
             System.out.println("1. Listar Clientes");
             System.out.println("2. Agregar Cliente");
             System.out.println("3. Editar Cliente");
-            System.out.println("4. Importar Datos");
+            System.out.println("4. Cargar Datos");
             System.out.println("5. Exportar Datos");
             System.out.println("6. Terminar Programa");
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+
+
+            System.out.println("Ingrese una Opcion");
+            String input = sc.nextLine();
+
+            int opcion = -1;
+
+            try {
+                opcion = Integer.parseInt(input);
+                if (opcion < 1 || opcion > 6) {
+                    System.out.println("Opcion no valida!");
+                    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Opción no válida, debe ingresar un número del 1 al 6. Intente nuevamente.");
+                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+            }
 
             switch (opcion) {
                 case 1:
@@ -59,16 +74,16 @@ public class Menu {
 
     private void agregarCliente() {
         System.out.print("Ingrese RUN del Cliente: ");
-        String run = scanner.nextLine();
+        String run = sc.nextLine();
         System.out.print("Ingrese nombre del Cliente: ");
-        String nombre = scanner.nextLine();
+        String nombre = sc.nextLine();
         System.out.print("Ingrese apellido del Cliente: ");
-        String apellido = scanner.nextLine();
+        String apellido = sc.nextLine();
         System.out.print("Ingrese años del Cliente: ");
-        int anios = scanner.nextInt();
-        scanner.nextLine();
+        int anios = sc.nextInt();
+        sc.nextLine();
         System.out.print("Ingrese categoría del Cliente (Activo/Inactivo): ");
-        String categoria = scanner.nextLine();
+        String categoria = sc.nextLine();
         CategoriaEnum nombreCategoria = CategoriaEnum.valueOf(categoria);
 
         clienteServicio.agregarCliente(run, nombre, apellido, anios, nombreCategoria);
@@ -76,16 +91,16 @@ public class Menu {
 
     private void editarCliente() {
         System.out.print("Ingrese RUN del Cliente a editar: ");
-        String run = scanner.nextLine();
+        String run = sc.nextLine();
         System.out.print("Ingrese nuevo nombre del Cliente: ");
-        String nombre = scanner.nextLine();
+        String nombre = sc.nextLine();
         System.out.print("Ingrese nuevo apellido del Cliente: ");
-        String apellido = scanner.nextLine();
+        String apellido = sc.nextLine();
         System.out.print("Ingrese nuevos años del Cliente: ");
-        int anios = scanner.nextInt();
-        scanner.nextLine(); // Consumir el salto de línea
+        int anios = sc.nextInt();
+        sc.nextLine(); // Consumir el salto de línea
         System.out.print("Ingrese nueva categoría del Cliente (Activo/Inactivo): ");
-        String categoria = scanner.nextLine();
+        String categoria = sc.nextLine();
         CategoriaEnum nombreCategoria = CategoriaEnum.valueOf(categoria);
 
         clienteServicio.editarCliente(run, nombre, apellido, anios, nombreCategoria);
@@ -97,7 +112,7 @@ public class Menu {
 
     private void exportarDatos() {
         System.out.print("Seleccione formato de exportación (csv/txt): ");
-        String formato = scanner.nextLine();
+        String formato = sc.nextLine();
         if ("csv".equalsIgnoreCase(formato)) {
             exportadorCsv.exportar(fileName, clienteServicio.getListaClientes());
         } else if ("txt".equalsIgnoreCase(formato)) {
@@ -109,6 +124,5 @@ public class Menu {
 
     private void terminarPrograma() {
         System.out.println("Programa finalizado.");
-        scanner.close();
     }
 }
