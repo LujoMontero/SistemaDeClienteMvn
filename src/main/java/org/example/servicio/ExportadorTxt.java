@@ -12,7 +12,7 @@ public class ExportadorTxt extends Exportador {
     public void exportar(String fileName, List<Cliente> listaClientes) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName + ".txt"))) {
             for (Cliente cliente : listaClientes) {
-                writer.println(cliente);
+                writer.println(cliente); // Se invoca el método toString de Cliente
             }
             System.out.println("Datos exportados correctamente en formato TXT.");
         } catch (Exception e) {

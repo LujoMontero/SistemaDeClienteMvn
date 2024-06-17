@@ -38,7 +38,7 @@ public class ClienteServicio {
                 return cliente.getNombreCategoria();
             }
         }
-        return null; // Si el cliente no se encuentra, retornamos null o podríamos lanzar una excepción.
+        return null;
     }
 
     public void cambiarEstadoCliente(String runCliente, CategoriaEnum nuevoEstado) {
@@ -60,6 +60,6 @@ public class ClienteServicio {
                 return cliente;
             }
         }
-        return null; // Si el cliente no se encuentra, retornamos null o podríamos lanzar una excepción.
+        return null;
     }
 }
