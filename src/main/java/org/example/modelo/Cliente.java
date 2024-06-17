@@ -17,11 +17,12 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente" + "\n" +
-                "Rut= " + runCliente + "\n" +
-                "Nombre= " + nombreCliente + "\n" +
-                "Apellido= " + apellidoCliente + "\n" +
-                "Anio= " + aniosCliente +"\n"+
-                "Categoria= " + nombreCategoria;
+        return "---------- Datos del Cliente---------------" + "\n" +
+                "Rut del Cliente= " + runCliente + "\n" +
+                "Nombre del Cliente= " + nombreCliente + "\n" +
+                "Apellido del Cliente= " + apellidoCliente + "\n" +
+                "Anio como Cliente= " + aniosCliente +"\n"+
+                "Categoria del Cliente= " + nombreCategoria+"\n"+
+                "--------------------------------------------";
     }
 }

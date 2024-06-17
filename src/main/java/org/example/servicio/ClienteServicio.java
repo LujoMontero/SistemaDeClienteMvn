@@ -2,18 +2,9 @@ package org.example.servicio;
 
 import org.example.modelo.CategoriaEnum;
 import org.example.modelo.Cliente;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 
 public class ClienteServicio {
     private List<Cliente> listaClientes = new ArrayList<>();
@@ -39,5 +30,36 @@ public class ClienteServicio {
                 break;
             }
         }
+    }
+
+    public CategoriaEnum getEstadoCliente(String runCliente) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getRunCliente().equals(runCliente)) {
+                return cliente.getNombreCategoria();
+            }
+        }
+        return null; // Si el cliente no se encuentra, retornamos null o podríamos lanzar una excepción.
+    }
+
+    public void cambiarEstadoCliente(String runCliente, CategoriaEnum nuevoEstado) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getRunCliente().equals(runCliente)) {
+                cliente.setNombreCategoria(nuevoEstado);
+                break;
+            }
+        }
+    }
+
+    public List<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+
+    public Cliente buscarClientePorRun(String runCliente) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getRunCliente().equals(runCliente)) {
+                return cliente;
+            }
+        }
+        return null; // Si el cliente no se encuentra, retornamos null o podríamos lanzar una excepción.
     }
 }

@@ -15,7 +15,7 @@ public class ArchivoServicio extends Exportador {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
                 Cliente cliente = new Cliente(datos[0], datos[1], datos[2], Integer.parseInt(datos[3]), CategoriaEnum.valueOf(datos[4]));
-                clienteServicio.agregarCliente(cliente.getRunCliente(), cliente.getNombreCliente(), cliente.getApellidoCliente(), cliente.getAniosCliente(), cliente.getNombreCategoria());
+                clienteServicio.agregarCliente(cliente.getRunCliente(), cliente.getNombreCliente(), cliente.getApellidoCliente(), cliente.getAniosCliente());
             }
             System.out.println("Datos cargados correctamente.");
         } catch (Exception e) {
