@@ -10,6 +10,15 @@ import org.example.servicio.ExportadorTxt;
 import java.util.Scanner;
 
 public class Menu {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     private ClienteServicio clienteServicio = new ClienteServicio();
     private ArchivoServicio archivoServicio = new ArchivoServicio();
     private ExportadorCsv exportadorCsv = new ExportadorCsv();
@@ -20,14 +29,14 @@ public class Menu {
 
     public void iniciarMenu() {
         while (true) {
-            System.out.println("1. Listar Clientes");
-            System.out.println("2. Agregar Cliente");
-            System.out.println("3. Editar Cliente");
-            System.out.println("4. Cargar Datos");
-            System.out.println("5. Exportar Datos");
-            System.out.println("6. Terminar Programa");
+            System.out.println(ANSI_YELLOW+ "1. Listar Clientes");
+            System.out.println("2. Agregar Cliente"+ ANSI_RESET);
+            System.out.println(ANSI_BLUE + "3. Editar Cliente");
+            System.out.println("4. Cargar Datos" + ANSI_RESET);
+            System.out.println(ANSI_RED + "5. Exportar Datos");
+            System.out.println("6. Terminar Programa" + ANSI_RESET);
 
-            System.out.print("Ingrese una Opción: ");
+            System.out.print(ANSI_WHITE + "Ingrese una Opción: " + ANSI_RESET);
             String input = sc.nextLine();
 
             int opcion = -1;
@@ -35,12 +44,12 @@ public class Menu {
             try {
                 opcion = Integer.parseInt(input);
                 if (opcion < 1 || opcion > 6) {
-                    System.out.println("Opción no válida!");
+                    System.out.println(ANSI_CYAN + "Opción no válida!");
                     System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Opción no válida, debe ingresar un número del 1 al 6. Intente nuevamente.");
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" + ANSI_RESET);
             }
 
             switch (opcion) {
@@ -71,7 +80,7 @@ public class Menu {
     }
 
     private void agregarCliente() {
-        System.out.println("------------ Crear Cliente -------------");
+        System.out.println(ANSI_PURPLE + "------------ Crear Cliente -------------");
         System.out.print("Ingrese RUN del Cliente: ");
         String run = sc.nextLine();
         System.out.print("Ingrese Nombre del Cliente: ");
@@ -85,18 +94,18 @@ public class Menu {
         CategoriaEnum categoria = CategoriaEnum.ACTIVO;
 
         clienteServicio.agregarCliente(run, nombre, apellido, anios, categoria);
-        System.out.println("Cliente agregado correctamente con categoría Activo.");
+        System.out.println("Cliente agregado correctamente con categoría Activo." + ANSI_RESET);
     }
 
     private void editarCliente() {
         boolean continuar = true;
         while (continuar) {
-            System.out.println("-------------Editar Cliente-------------");
+            System.out.println(ANSI_GREEN + "-------------Editar Cliente-------------");
             System.out.println("Seleccione qué desea hacer:");
             System.out.println("1.- Cambiar el estado del Cliente");
             System.out.println("2.- Editar los datos ingresados del Cliente");
             System.out.println("3.- Volver al menú principal");
-            System.out.print("Ingrese opción: ");
+            System.out.print("Ingrese opción: " + ANSI_RESET);
             String opcionStr = sc.nextLine();
 
             int opcion = -1;
@@ -105,18 +114,18 @@ public class Menu {
                 opcion = Integer.parseInt(opcionStr);
                 if (opcion < 1 || opcion > 3) {
                     System.out.println("Opción no válida!");
-                    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                    System.out.println(ANSI_CYAN + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                     continue;
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Opción no válida, debe ingresar un número del 1 al 3. Intente nuevamente.");
-                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" + ANSI_RESET);
                 continue;
             }
 
             switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese RUN del Cliente a editar: ");
+                    System.out.print(ANSI_RED + "Ingrese RUN del Cliente a editar: ");
                     String runEstado = sc.nextLine();
                     CategoriaEnum estadoActual = clienteServicio.getEstadoCliente(runEstado);
                     if (estadoActual == null) {
@@ -145,13 +154,13 @@ public class Menu {
                     String run = sc.nextLine();
                     Cliente cliente = clienteServicio.buscarClientePorRun(run);
                     if (cliente == null) {
-                        System.out.println("Cliente no encontrado.");
+                        System.out.println("Cliente no encontrado." + ANSI_RESET);
                         break;
                     }
 
                     boolean editarDatos = true;
                     while (editarDatos) {
-                        System.out.println("----Actualizando datos del Cliente-----");
+                        System.out.println(ANSI_GREEN + "----Actualizando datos del Cliente-----");
                         System.out.println("1.- El RUN del Cliente es: " + cliente.getRunCliente());
                         System.out.println("2.- El Nombre del Cliente es: " + cliente.getNombreCliente());
                         System.out.println("3.- El Apellido del Cliente es: " + cliente.getApellidoCliente());
@@ -187,7 +196,7 @@ public class Menu {
                                 break;
                         }
                     }
-                    System.out.println("Datos del cliente actualizados correctamente.");
+                    System.out.println("Datos del cliente actualizados correctamente." + ANSI_RESET);
                     break;
                 case 3:
                     continuar = false;
@@ -197,7 +206,7 @@ public class Menu {
     }
 
     private void cargarDatos() {
-        System.out.println("---------Cargar Datos-----------");
+        System.out.println(ANSI_PURPLE + "---------Cargar Datos-----------");
         System.out.println("Ingrese la ruta donde se encuentra el archivo " + fileName1 + ":");
         String ruta = sc.nextLine();
 
@@ -209,7 +218,7 @@ public class Menu {
         System.out.println("Seleccione el formato a exportar:");
         System.out.println("1. Formato CSV");
         System.out.println("2. Formato TXT");
-        System.out.print("Ingrese una opción para exportar: ");
+        System.out.print("Ingrese una opción para exportar: " + ANSI_RESET);
         String opcionStr = sc.nextLine();
 
         int opcion = -1;
@@ -217,19 +226,19 @@ public class Menu {
         try {
             opcion = Integer.parseInt(opcionStr);
             if (opcion < 1 || opcion > 2) {
-                System.out.println("Opción no válida!");
+                System.out.println(ANSI_CYAN + "Opción no válida!");
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 return;
             }
         } catch (NumberFormatException e) {
             System.out.println("Opción no válida, debe ingresar un número del 1 al 2. Intente nuevamente.");
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n" + ANSI_RESET);
             return;
         }
 
         switch (opcion) {
             case 1:
-                System.out.println("Ingrese la ruta donde desea exportar el archivo " + fileName + ".csv:");
+                System.out.println(ANSI_BLUE + "Ingrese la ruta donde desea exportar el archivo " + fileName + ".csv:");
                 String rutaCsv = sc.nextLine();
                 exportadorCsv.exportar(rutaCsv + "\\" + fileName, clienteServicio.getListaClientes());
                 System.out.println("Datos de clientes exportados correctamente en formato CSV.");
@@ -244,6 +253,6 @@ public class Menu {
     }
 
         private void terminarPrograma() {
-        System.out.println("Programa finalizado.");
+        System.out.println("Programa finalizado." + ANSI_RESET);
     }
 }

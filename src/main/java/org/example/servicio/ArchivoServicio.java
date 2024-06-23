@@ -13,6 +13,9 @@ import java.util.Scanner;
 
 public class ArchivoServicio extends Exportador {
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+
     private static final Scanner sc = new Scanner(System.in);
 
     public void cargarDatos(String filePath, ClienteServicio clienteServicio) {
@@ -23,7 +26,7 @@ public class ArchivoServicio extends Exportador {
                 Cliente cliente = new Cliente(datos[0], datos[1], datos[2], Integer.parseInt(datos[3]), CategoriaEnum.valueOf(datos[4].trim()));
                 clienteServicio.agregarCliente(cliente.getRunCliente(), cliente.getNombreCliente(), cliente.getApellidoCliente(), cliente.getAniosCliente(),cliente.getNombreCategoria());
             }
-            System.out.println("Datos cargados correctamente.");
+            System.out.println(ANSI_RED + "Datos cargados correctamente.");
         } catch (Exception e) {
             System.out.println("Error al cargar datos: " + e.getMessage());
         }
@@ -78,7 +81,7 @@ public class ArchivoServicio extends Exportador {
     private String obtenerRutaExportacion(String formato) {
         String sistemaOperativo = System.getProperty("os.name").toLowerCase();
         String mensaje = sistemaOperativo.contains("win") ? "C:\\ruta\\" + "clientes." + formato :
-                "/home/usuario/" + "clientes." + formato;
+                "/home/usuario/" + "clientes." + formato + ANSI_RESET;
         System.out.println(mensaje);
         String rutaArchivo = sc.nextLine();
         return rutaArchivo;
